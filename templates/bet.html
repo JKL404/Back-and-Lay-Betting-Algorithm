@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title> Betting List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="keywords" content="Cloud Vision" />
+    <script>
+        addEventListener("load", function() {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+
+    </script>
+    <!-- Custom Theme files -->
+    <link href="{{ url_for('static', filename='css/bootstrap.css') }}" type="text/css" rel="stylesheet" media="all">
+    <link href="{{ url_for('static', filename='css/style.css') }}" type="text/css" rel="stylesheet" media="all">
+    <!-- font-awesome icons -->
+    <link href="{{ url_for('static', filename='css/font-awesome.min.css') }}" rel="stylesheet">
+    <!-- //Custom Theme files -->
+    <!-- online-fonts -->
+    <link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800" rel="stylesheet">
+    <!-- //online-fonts -->
+       <style type="text/css">
+
+    	@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap');
+
+*, body {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+    background-color: #152733;
+    color: white;
+}
+
+
+
+.form-content .form-items {
+    border: 3px solid #fff;
+    padding: 40px;
+    display: inline-block;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    text-align: left;
+    -webkit-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+
+.form-content h3 {
+    color: #fff;
+    text-align: left;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.form-content h3.form-title {
+    margin-bottom: 30px;
+}
+
+.form-content p {
+    color: #fff;
+    text-align: left;
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 20px;
+    margin-bottom: 30px;
+}
+
+@media only screen and (min-width: 1000px) {
+.mycard {
+        width: 100%;
+    min-width: 115%;
+
+}
+
+
+.btn-primary{
+    background-color: #6C757D;
+    outline: none;
+    border: 0px;
+     box-shadow: none;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active{
+    background-color: #495056;
+    outline: none !important;
+    border: none !important;
+     box-shadow: none;
+}
+
+
+
+    </style>
+</head>
+
+<body>
+
+    <section class="main-banner" id="home">
+        <div class="layer">
+            <div class="header-wthree-top-w3layouts text-right">
+                <h1 class="logo"><a href="/">Home</a></h1>
+
+            </div>
+        </div>
+    </section>
+<section class="banner-bottom-w3ls py-lg-5 py-4" id="text">
+<div class="container py-sm-5 py-4">
+<div class="ab-grids row text-left">
+    <div class="form-body col-md" >
+            <div class="form-holder">
+                <div class="form-content" >
+                    <div class="form-items ">
+                        {%- for category, message in get_flashed_messages(with_categories = true) %}
+                         <div class = "alert alert-danger">
+                            {{ message }}
+                         </div>
+                        {%- endfor %}
+                        <form action = "{{ request.path }}" method = "post">
+                         <label for = "matchid">Match ID:</label><br>
+                         <input type = "text" name = "matchid" placeholder = "Match ID" required class="form-control" /><br>
+                         <label for = "team">Favourite Team:</label><br>
+                         <input type = "text" name = "team" placeholder = "Your Team" required class="form-control"/><br>
+                         <label for = "stake">Stake Amount:</label><br>
+                         <input type = "number" name = "stake" placeholder="00" required name="price" min="0" value="0" title="Currency" class="form-control"/><br>
+                         <label for = "PIN">Odds:</label><br>
+                         <input type = "number" name = "odds" placeholder="0.00" required name="price" min="1" value="1.00" step="0.01" title="Currency" pattern="^\d+(?:\.\d{1,2})?$" onblur="this.parentNode.parentNode.style.backgroundColor=/^\d+(?:\.\d{1,2})?$/.test(this.value)?'inherit':'red' " class="form-control" /><br>
+                         <input type = "radio" id="back" name = "blcheck" value="0" required /> <label for = "back"> Back </label>
+                         <input type = "radio" id="lay" name = "blcheck" value="1" required /> <label for = "lay"> Lay </label><br>
+                         <input type = "hidden" name = "betwith" value="0" />
+                         <input type = "submit" class="btn btn-primary" value = "Bet" style="float: right;" />
+                      </form>
+                   </div>
+                </div>
+            </div>
+    </div>
+    <div class="col-md">
+        <h3>Betting Table</h3>
+      <table class="table small mb-5">
+         <thead class="thead-dark">
+            <tr>
+               <th>UserID</th>
+               <th>Match ID</th>
+               <th>Favourite Team</th>
+               <th>Stake Amount</th>
+               <th>Odds</th>
+               <th>Back/Lay</th>
+               <th>Bet With</th>
+            </tr>
+         </thead>
+         <tbody>
+            {% if users %}
+            {% for user in users %}
+               <tr  class="bg-success text-white">
+                  <td>{{ user.id }}</td>
+                  <td>{{ user.matchid }}</td>
+                  <td>{{ user.team }}</td>
+                  <td>{{ user.stake }}</td>
+                  <td>{{ user.odds }}</td>
+                  <td>
+                    {% if user.blcheck == 0 %}
+                        Back
+                    {% else %}
+                        Lay
+                    {% endif %}
+                  </td>
+                  <td>
+                    {% if user.betwith == 0 %}
+                        -
+                    {% else %}
+                       {{ user.betwith }}
+                    {% endif %}
+                  </td>
+               </tr>
+            {% endfor %}
+            {% else %}
+            <tr><th colspan="7">No Records Found</th></tr>
+            {% endif %}
+         </tbody>
+      </table>
+    </div>
+
+</div>
+
+</div>
+  </section>
+
+
+</body>
+
+</html>

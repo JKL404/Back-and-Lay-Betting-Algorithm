@@ -1,0 +1,827 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>LNB Betting</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="keywords" content="Cloud Vision" />
+    <script>
+        addEventListener("load", function() {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+
+    </script>
+    <!-- Custom Theme files -->
+    <link href="{{ url_for('static', filename='css/bootstrap.css') }}" type="text/css" rel="stylesheet" media="all">
+    <link href="{{ url_for('static', filename='css/style.css') }}" type="text/css" rel="stylesheet" media="all">
+    <!-- font-awesome icons -->
+    <link href="{{ url_for('static', filename='css/font-awesome.min.css') }}" rel="stylesheet">
+    <!-- //Custom Theme files -->
+    <!-- online-fonts -->
+    <link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800" rel="stylesheet">
+    <!-- //online-fonts -->
+    <style type="text/css">
+    	@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap');
+
+*, body {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+    background-color: #152733;
+    color:  white;
+}
+
+
+.form-content .form-items {
+    border: 3px solid #fff;
+    padding: 1em;
+    display: inline-block;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    text-align: left;
+    -webkit-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+    margin-bottom: 1em;
+}
+
+@media only screen and (min-width: 1000px) {
+.mycard {
+        width: 100%;
+    min-width: 115%;
+
+}
+.mycard1 {
+        width: 100%;
+    min-width: 140%;
+    margin-left: 6em;
+}
+}
+th{
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+
+.mbtn{
+    width: 4em;
+    background-color: #0000FF;
+    font-weight: bold;
+    color: white;
+} 
+.mbtn1{
+    width: 4em;
+    background-color: #FFC0CB;
+    font-weight: bold;
+}    
+.lfoot {
+  text-align: right;
+}
+
+</style>
+
+</head>
+
+<body>
+
+    <section class="main-banner" id="home">
+        <div class="layer">
+            <div class="header-wthree-top-w3layouts text-right">
+                <h1 class="logo"><a href="/"></a></h1>
+
+            </div>
+            <div class="container" >
+                <div class="baner-info-w3layouts text-center">
+                    <h3 ></h3>
+                    <h6 class="mx-auto mt-md-4 mt-3"></h6>
+                </div>
+            </div>
+        </div>
+    </section>
+<section class="banner-bottom-w3ls py-lg-5 py-4" id="text">
+<div class="container row py-sm-5 py-4 ">
+    <div class="form-body form-content col-lg-8">
+                    <div class="form-items mycard">
+
+            <!--start code-->
+            <div class="widget">
+              <!-- widget title -->
+              <div class="mb-3 text-center">
+                <h4>
+                  <span>Today's Betting Lists: {{ today }}</span>
+                </h4>
+              </div>
+              <!-- widget content -->
+              <table class="table small mb-5">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">CONTRACT</th>
+                    <th scope="col">Last Traded Price</th>
+                    <th scope="col">BACK</th>
+                    <th scope="col">LAY</th>
+                  </tr>
+                </thead>
+                 <tbody>
+<!--                     <tr class="bg-secondarytext-white">
+                        <th>Man Utd Vs Aston Villa</th>
+                  </tr>
+                  <tr class="bg-success text-white">
+                    <th>Man Utd</th>
+                    <td><b>56.82% </b><br>1.76</td>
+                    <td>
+                        <button class="mbtn" id="mufvdft" onclick="checkbtn(this)">1.77 <sub>ATP</sub></button><input type="hidden" id="mufvdftv" value="1.77"><input type="hidden" id="mufvdfttm" value="Man Utd"><input type="hidden" id="mufvdftmid" value="muvsav011122"><input type="hidden" id="mufvdftst" value="0">
+
+                        {% if users %}
+                        {% for user in users %}
+                            {% if user.matchid == 'muvsav011122' and user.betwith == 0 and user.blcheck == 1 and user.team =='Man Utd' %}
+                                <button class="mbtn" id="{{ user.matchid }}{{ user.id  }}" onclick="checkbtn(this)">{{ user.odds }} <sub>{{ user.stake }}</sub></button><input type="hidden" id="{{ user.matchid }}{{ user.id  }}v" value="{{ user.odds }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}tm" value="{{ user.team }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}mid" value="{{ user.matchid }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}st" value="{{ user.stake }}">  
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </td>
+                    <td><button class="mbtn1" id="mufvdftl" onclick="checkbtn2(this)">1.78 <sub>ATP</sub></button><input type="hidden" id="mufvdftlv" value="1.78"><input type="hidden" id="mufvdftltm" value="Man Utd">
+                    <input type="hidden" id="mufvdftlmid" value="muvsav011122"><input type="hidden" id="mufvdftlst" value="0">
+                        {% if users %}
+                        {% for user in users %}
+                            {% if user.matchid == 'muvsav011122' and user.betwith == 0 and user.blcheck == 0 and user.team =='Man Utd' %}
+                                <button class="mbtn1" id="{{ user.matchid }}{{ user.id  }}" onclick="checkbtn2(this)">{{ user.odds }} <sub>{{ user.stake }}</sub></button><input type="hidden" id="{{ user.matchid }}{{ user.id  }}v" value="{{ user.odds }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}tm" value="{{ user.team }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}mid" value="{{ user.matchid }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}st" value="{{ user.stake }}">  
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+
+                    </td>
+                  </tr>
+           <tr class="bg-warning text-white">
+                    <th>DRAW</th>
+                    <td><b>23.81%</b><br>4.2</td>
+                    <td><button class="mbtn" id="drwdft" onclick="checkbtn(this)">4.0 <sub>ATP</sub></button><input type="hidden" id="drwdftv" value="4"><input type="hidden" id="drwdfttm" value="DRAW-MUvsAV">
+                    <input type="hidden" id="drwdftmid" value="muvsav011122"><input type="hidden" id="drwdftst" value="0">
+                     {% if users %}
+                        {% for user in users %}
+                            {% if user.matchid == 'muvsav011122' and user.betwith == 0 and user.blcheck == 1 and user.team =='DRAW-MUvsAV' %}
+                                <button class="mbtn" id="{{ user.matchid }}{{ user.id  }}" onclick="checkbtn(this)">{{ user.odds }} <sub>{{ user.stake }}</sub></button><input type="hidden" id="{{ user.matchid }}{{ user.id  }}v" value="{{ user.odds }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}tm" value="{{ user.team }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}mid" value="{{ user.matchid }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}st" value="{{ user.stake }}">  
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+
+                    </td>
+                    <td><button class="mbtn1" id="drwdft1" onclick="checkbtn2(this)">4.1 <sub>ATP</sub></button><input type="hidden" id="drwdft1v" value="4.1"> <input type="hidden" id="drwdft1tm" value="DRAW-MUvsAV">
+                    <input type="hidden" id="drwdft1mid" value="muvsav011122"><input type="hidden" id="drwdft1st" value="0">
+                        {% if users %}
+                        {% for user in users %}
+                            {% if user.matchid == 'muvsav011122' and user.betwith == 0 and user.blcheck == 0 and user.team =='DRAW-MUvsAV' %}
+                                <button class="mbtn1" id="{{ user.matchid }}{{ user.id  }}" onclick="checkbtn2(this)">{{ user.odds }} <sub>{{ user.stake }}</sub></button><input type="hidden" id="{{ user.matchid }}{{ user.id  }}v" value="{{ user.odds }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}tm" value="{{ user.team }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}mid" value="{{ user.matchid }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}st" value="{{ user.stake }}">  
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+
+                    </td>
+                  </tr>
+                  <tr class="bg-success text-white">
+                    <th>Aston Villa</th>
+                    <td><b>18.87% </b><br>5.3</td>
+                    <td><button class="mbtn" id="avfvdft" onclick="checkbtn(this)">5.0 <sub>ATP</sub></button><input type="hidden" id="avfvdftv" value="5"><input type="hidden" id="avfvdfttm" value="Aston Villa">
+                    <input type="hidden" id="avfvdftmid" value="muvsav011122"><input type="hidden" id="avfvdftst" value="0">
+                     {% if users %}
+                        {% for user in users %}
+                            {% if user.matchid == 'muvsav011122' and user.betwith == 0 and user.blcheck == 1 and user.team =='Aston Villa' %}
+                                <button class="mbtn" id="{{ user.matchid }}{{ user.id  }}" onclick="checkbtn(this)">{{ user.odds }} <sub>{{ user.stake }}</sub></button><input type="hidden" id="{{ user.matchid }}{{ user.id  }}v" value="{{ user.odds }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}tm" value="{{ user.team }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}mid" value="{{ user.matchid }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}st" value="{{ user.stake }}">  
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+
+                    </td>
+                    <td><button class="mbtn1" id="avfvdft1" onclick="checkbtn2(this)">5.3 <sub>ATP</sub></button><input type="hidden" id="avfvdft1v" value="5.3"><input type="hidden" id="avfvdft1tm" value="Aston Villa">
+                    <input type="hidden" id="avfvdft1mid" value="muvsav011122"><input type="hidden" id="avfvdft1st" value="0">
+                     {% if users %}
+                        {% for user in users %}
+                            {% if user.matchid == 'muvsav011122' and user.betwith == 0 and user.blcheck == 0 and user.team =='Aston Villa' %}
+                                <button class="mbtn1" id="{{ user.matchid }}{{ user.id  }}" onclick="checkbtn2(this)">{{ user.odds }} <sub>{{ user.stake }}</sub></button><input type="hidden" id="{{ user.matchid }}{{ user.id  }}v" value="{{ user.odds }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}tm" value="{{ user.team }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}mid" value="{{ user.matchid }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}st" value="{{ user.stake }}">  
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </td>
+                  </tr> -->
+             <tr>
+                 <th colspan="4" class="text-center"> </th>
+            </tr>
+                <tr class="bg-info text-white">
+                    <th colspan="4" class="text-center">Premier League </th>
+                  </tr>
+            {% if pleague %}
+                {% for match in pleague %}
+                  <tr class=" text-white">
+                    <th colspan="3">{{ match['match_title'] }} </th>
+                    <th >{{ match['match_time'] }} </th>
+                  </tr>
+
+                  <tr class="bg-success text-white">
+                    <th>{{ match['home_team'] }}</th>
+                    <td><b>{{ match['home_team_odds_prev'] }} </b></td>
+                    <td><button class="mbtn" id="{{ match['match_id'] }}" onclick="checkbtn(this)">{{ match['home_team_odds'] }} <sub>ATP</sub></button><input type="hidden" id="{{ match['match_id'] }}v" value="{{ match['home_team_odds'] }}"><input type="hidden" id="{{ match['match_id'] }}tm" value="{{ match['home_team'] }}">
+                    <input type="hidden" id="{{ match['match_id'] }}mid" value="{{ match['match_id'] }}"><input type="hidden" id="{{ match['match_id'] }}st" value="0">
+                     {% if users %}
+                        {% for user in users %}
+                            {% if user.matchid == match['match_id'] and user.betwith == 0 and user.blcheck == 1 and user.team == match['home_team'] %}
+                                <button class="mbtn" id="{{ user.matchid }}{{ user.id  }}" onclick="checkbtn(this)">{{ user.odds }} <sub>{{ user.stake }}</sub></button><input type="hidden" id="{{ user.matchid }}{{ user.id  }}v" value="{{ user.odds }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}tm" value="{{ user.team }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}mid" value="{{ user.matchid }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}st" value="{{ user.stake }}">  
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </td>
+                    <td><button class="mbtn1" id="{{ match['match_id'] }}l" onclick="checkbtn2(this)">{{ match['home_team_odds'] }} <sub>ATP</sub></button><input type="hidden" id="{{ match['match_id'] }}lv" value="{{ match['home_team_odds'] }}"><input type="hidden" id="{{ match['match_id'] }}ltm" value="{{ match['home_team'] }}">
+                    <input type="hidden" id="{{ match['match_id'] }}lmid" value="{{ match['match_id'] }}"><input type="hidden" id="{{ match['match_id'] }}lst" value="0">
+                     {% if users %}
+                        {% for user in users %}
+                            {% if user.matchid == match['match_id'] and user.betwith == 0 and user.blcheck == 0 and user.team == match['home_team'] %}
+                                <button class="mbtn1" id="{{ user.matchid }}{{ user.id  }}" onclick="checkbtn2(this)">{{ user.odds }} <sub>{{ user.stake }}</sub></button><input type="hidden" id="{{ user.matchid }}{{ user.id  }}v" value="{{ user.odds }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}tm" value="{{ user.team }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}mid" value="{{ user.matchid }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}st" value="{{ user.stake }}">  
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </td>
+                  </tr>
+
+
+                <tr class="bg-warning text-white">
+                    <th>{{ match['draw_team'] }}</th>
+                    <td><b>{{ match['draw_team_odds_prev'] }} </b></td>
+                    <td><button class="mbtn" id="{{ match['match_id'] }}d" onclick="checkbtn(this)">{{ match['draw_team_odds'] }} <sub>ATP</sub></button><input type="hidden" id="{{ match['match_id'] }}dv" value="{{ match['draw_team_odds'] }}"><input type="hidden" id="{{ match['match_id'] }}dtm" value="{{ match['draw_team'] }}: {{ match['match_id'][:8] }}">
+                    <input type="hidden" id="{{ match['match_id'] }}dmid" value="{{ match['match_id'] }}"><input type="hidden" id="{{ match['match_id'] }}dst" value="0">
+                     {% if users %}
+                        {% for user in users %}
+                            {% if user.matchid == match['match_id'] and user.betwith == 0 and user.blcheck == 1 and user.team == match['draw_team'] %}
+                                <button class="mbtn" id="{{ user.matchid }}{{ user.id  }}" onclick="checkbtn(this)">{{ user.odds }} <sub>{{ user.stake }}</sub></button><input type="hidden" id="{{ user.matchid }}{{ user.id  }}v" value="{{ user.odds }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}tm" value="{{ user.team }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}mid" value="{{ user.matchid }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}st" value="{{ user.stake }}">  
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </td>
+                    <td><button class="mbtn1" id="{{ match['match_id'] }}d1" onclick="checkbtn2(this)">{{ match['draw_team_odds'] }} <sub>ATP</sub></button><input type="hidden" id="{{ match['match_id'] }}d1v" value="{{ match['draw_team_odds'] }}"><input type="hidden" id="{{ match['match_id'] }}d1tm" value="{{ match['draw_team'] }}: {{ match['match_id'][:8] }}">
+                    <input type="hidden" id="{{ match['match_id'] }}d1mid" value="{{ match['match_id'] }}"><input type="hidden" id="{{ match['match_id'] }}d1st" value="0">
+                     {% if users %}
+                        {% for user in users %}
+                            {% if user.matchid == match['match_id'] and user.betwith == 0 and user.blcheck == 0 and user.team == match['draw_team'] %}
+                                <button class="mbtn1" id="{{ user.matchid }}{{ user.id  }}" onclick="checkbtn2(this)">{{ user.odds }} <sub>{{ user.stake }}</sub></button><input type="hidden" id="{{ user.matchid }}{{ user.id  }}v" value="{{ user.odds }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}tm" value="{{ user.team }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}mid" value="{{ user.matchid }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}st" value="{{ user.stake }}">  
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </td>
+                  </tr>
+
+                <tr class="bg-success text-white">
+                    <th>{{ match['away_team'] }}</th>
+                    <td><b>{{ match['away_team_odds_prev'] }} </b></td>
+                    <td><button class="mbtn" id="{{ match['match_id'] }}a" onclick="checkbtn(this)">{{ match['away_team_odds'] }} <sub>ATP</sub></button><input type="hidden" id="{{ match['match_id'] }}av" value="{{ match['away_team_odds'] }}"><input type="hidden" id="{{ match['match_id'] }}atm" value="{{ match['away_team'] }}">
+                    <input type="hidden" id="{{ match['match_id'] }}amid" value="{{ match['match_id'] }}"><input type="hidden" id="{{ match['match_id'] }}ast" value="0">
+                     {% if users %}
+                        {% for user in users %}
+                            {% if user.matchid == match['match_id'] and user.betwith == 0 and user.blcheck == 1 and user.team == match['away_team'] %}
+                                <button class="mbtn" id="{{ user.matchid }}{{ user.id  }}" onclick="checkbtn(this)">{{ user.odds }} <sub>{{ user.stake }}</sub></button><input type="hidden" id="{{ user.matchid }}{{ user.id  }}v" value="{{ user.odds }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}tm" value="{{ user.team }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}mid" value="{{ user.matchid }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}st" value="{{ user.stake }}">  
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </td>
+                    <td><button class="mbtn1" id="{{ match['match_id'] }}al" onclick="checkbtn2(this)">{{ match['away_team_odds'] }} <sub>ATP</sub></button><input type="hidden" id="{{ match['match_id'] }}alv" value="{{ match['away_team_odds'] }}"><input type="hidden" id="{{ match['match_id'] }}altm" value="{{ match['away_team'] }}">
+                    <input type="hidden" id="{{ match['match_id'] }}almid" value="{{ match['match_id'] }}"><input type="hidden" id="{{ match['match_id'] }}alst" value="0">
+                     {% if users %}
+                        {% for user in users %}
+                            {% if user.matchid == match['match_id'] and user.betwith == 0 and user.blcheck == 0 and user.team == match['away_team'] %}
+                                <button class="mbtn1" id="{{ user.matchid }}{{ user.id  }}" onclick="checkbtn2(this)">{{ user.odds }} <sub>{{ user.stake }}</sub></button><input type="hidden" id="{{ user.matchid }}{{ user.id  }}v" value="{{ user.odds }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}tm" value="{{ user.team }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}mid" value="{{ user.matchid }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}st" value="{{ user.stake }}">  
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </td>
+                  </tr>
+
+                {% endfor %}
+            {% endif %}
+
+            {% if eflcup %}
+            <tr>
+                 <th colspan="4" class="text-center"> </th>
+            </tr>
+                <tr class="bg-info text-white">
+                    <th colspan="4" class="text-center">EFL Cup</th>
+                  </tr>
+                {% for match in eflcup %}
+                  <tr class=" text-white">
+                    <th colspan="3">{{ match['match_title'] }} </th>
+                    <th >{{ match['match_time'] }} </th>
+                  </tr>
+
+                  <tr class="bg-success text-white">
+                    <th>{{ match['home_team'] }}</th>
+                    <td><b>{{ match['home_team_odds_prev'] }} </b></td>
+                    <td><button class="mbtn" id="{{ match['match_id'] }}" onclick="checkbtn(this)">{{ match['home_team_odds'] }} <sub>ATP</sub></button><input type="hidden" id="{{ match['match_id'] }}v" value="{{ match['home_team_odds'] }}"><input type="hidden" id="{{ match['match_id'] }}tm" value="{{ match['home_team'] }}">
+                    <input type="hidden" id="{{ match['match_id'] }}mid" value="{{ match['match_id'] }}"><input type="hidden" id="{{ match['match_id'] }}st" value="0">
+                     {% if users %}
+                        {% for user in users %}
+                            {% if user.matchid == match['match_id'] and user.betwith == 0 and user.blcheck == 1 and user.team == match['home_team'] %}
+                                <button class="mbtn" id="{{ user.matchid }}{{ user.id  }}" onclick="checkbtn(this)">{{ user.odds }} <sub>{{ user.stake }}</sub></button><input type="hidden" id="{{ user.matchid }}{{ user.id  }}v" value="{{ user.odds }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}tm" value="{{ user.team }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}mid" value="{{ user.matchid }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}st" value="{{ user.stake }}">  
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </td>
+                    <td><button class="mbtn1" id="{{ match['match_id'] }}l" onclick="checkbtn2(this)">{{ match['home_team_odds'] }} <sub>ATP</sub></button><input type="hidden" id="{{ match['match_id'] }}lv" value="{{ match['home_team_odds'] }}"><input type="hidden" id="{{ match['match_id'] }}ltm" value="{{ match['home_team'] }}">
+                    <input type="hidden" id="{{ match['match_id'] }}lmid" value="{{ match['match_id'] }}"><input type="hidden" id="{{ match['match_id'] }}lst" value="0">
+                     {% if users %}
+                        {% for user in users %}
+                            {% if user.matchid == match['match_id'] and user.betwith == 0 and user.blcheck == 0 and user.team == match['home_team'] %}
+                                <button class="mbtn1" id="{{ user.matchid }}{{ user.id  }}" onclick="checkbtn2(this)">{{ user.odds }} <sub>{{ user.stake }}</sub></button><input type="hidden" id="{{ user.matchid }}{{ user.id  }}v" value="{{ user.odds }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}tm" value="{{ user.team }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}mid" value="{{ user.matchid }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}st" value="{{ user.stake }}">  
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </td>
+                  </tr>
+
+
+                <tr class="bg-warning text-white">
+                    <th>{{ match['draw_team'] }}</th>
+                    <td><b>{{ match['draw_team_odds_prev'] }} </b></td>
+                    <td><button class="mbtn" id="{{ match['match_id'] }}d" onclick="checkbtn(this)">{{ match['draw_team_odds'] }} <sub>ATP</sub></button><input type="hidden" id="{{ match['match_id'] }}dv" value="{{ match['draw_team_odds'] }}"><input type="hidden" id="{{ match['match_id'] }}dtm" value="{{ match['draw_team'] }}: {{ match['match_id'][:8] }}">
+                    <input type="hidden" id="{{ match['match_id'] }}dmid" value="{{ match['match_id'] }}"><input type="hidden" id="{{ match['match_id'] }}dst" value="0">
+                     {% if users %}
+                        {% for user in users %}
+                            {% if user.matchid == match['match_id'] and user.betwith == 0 and user.blcheck == 1 and user.team == match['draw_team'] %}
+                                <button class="mbtn" id="{{ user.matchid }}{{ user.id  }}" onclick="checkbtn(this)">{{ user.odds }} <sub>{{ user.stake }}</sub></button><input type="hidden" id="{{ user.matchid }}{{ user.id  }}v" value="{{ user.odds }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}tm" value="{{ user.team }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}mid" value="{{ user.matchid }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}st" value="{{ user.stake }}">  
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </td>
+                    <td><button class="mbtn1" id="{{ match['match_id'] }}d1" onclick="checkbtn2(this)">{{ match['draw_team_odds'] }} <sub>ATP</sub></button><input type="hidden" id="{{ match['match_id'] }}d1v" value="{{ match['draw_team_odds'] }}"><input type="hidden" id="{{ match['match_id'] }}d1tm" value="{{ match['draw_team'] }}: {{ match['match_id'][:8] }}">
+                    <input type="hidden" id="{{ match['match_id'] }}d1mid" value="{{ match['match_id'] }}"><input type="hidden" id="{{ match['match_id'] }}d1st" value="0">
+                     {% if users %}
+                        {% for user in users %}
+                            {% if user.matchid == match['match_id'] and user.betwith == 0 and user.blcheck == 0 and user.team == match['draw_team'] %}
+                                <button class="mbtn1" id="{{ user.matchid }}{{ user.id  }}" onclick="checkbtn2(this)">{{ user.odds }} <sub>{{ user.stake }}</sub></button><input type="hidden" id="{{ user.matchid }}{{ user.id  }}v" value="{{ user.odds }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}tm" value="{{ user.team }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}mid" value="{{ user.matchid }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}st" value="{{ user.stake }}">  
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </td>
+                  </tr>
+
+                <tr class="bg-success text-white">
+                    <th>{{ match['away_team'] }}</th>
+                    <td><b>{{ match['away_team_odds_prev'] }} </b></td>
+                    <td><button class="mbtn" id="{{ match['match_id'] }}a" onclick="checkbtn(this)">{{ match['away_team_odds'] }} <sub>ATP</sub></button><input type="hidden" id="{{ match['match_id'] }}av" value="{{ match['away_team_odds'] }}"><input type="hidden" id="{{ match['match_id'] }}atm" value="{{ match['away_team'] }}">
+                    <input type="hidden" id="{{ match['match_id'] }}amid" value="{{ match['match_id'] }}"><input type="hidden" id="{{ match['match_id'] }}ast" value="0">
+                     {% if users %}
+                        {% for user in users %}
+                            {% if user.matchid == match['match_id'] and user.betwith == 0 and user.blcheck == 1 and user.team == match['away_team'] %}
+                                <button class="mbtn" id="{{ user.matchid }}{{ user.id  }}" onclick="checkbtn(this)">{{ user.odds }} <sub>{{ user.stake }}</sub></button><input type="hidden" id="{{ user.matchid }}{{ user.id  }}v" value="{{ user.odds }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}tm" value="{{ user.team }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}mid" value="{{ user.matchid }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}st" value="{{ user.stake }}">  
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </td>
+                    <td><button class="mbtn1" id="{{ match['match_id'] }}al" onclick="checkbtn2(this)">{{ match['away_team_odds'] }} <sub>ATP</sub></button><input type="hidden" id="{{ match['match_id'] }}alv" value="{{ match['away_team_odds'] }}"><input type="hidden" id="{{ match['match_id'] }}altm" value="{{ match['away_team'] }}">
+                    <input type="hidden" id="{{ match['match_id'] }}almid" value="{{ match['match_id'] }}"><input type="hidden" id="{{ match['match_id'] }}alst" value="0">
+                     {% if users %}
+                        {% for user in users %}
+                            {% if user.matchid == match['match_id'] and user.betwith == 0 and user.blcheck == 0 and user.team == match['away_team'] %}
+                                <button class="mbtn1" id="{{ user.matchid }}{{ user.id  }}" onclick="checkbtn2(this)">{{ user.odds }} <sub>{{ user.stake }}</sub></button><input type="hidden" id="{{ user.matchid }}{{ user.id  }}v" value="{{ user.odds }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}tm" value="{{ user.team }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}mid" value="{{ user.matchid }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}st" value="{{ user.stake }}">  
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </td>
+                  </tr>
+
+                {% endfor %}
+            {% endif %}
+
+        {% if supercupspain %}
+            <tr>
+                 <th colspan="4" class="text-center"> </th>
+            </tr>
+                <tr class="bg-info text-white">
+                    <th colspan="4" class="text-center">SUPER CUP SPAIN</th>
+                  </tr>
+                {% for match in supercupspain %}
+                  <tr class=" text-white">
+                    <th colspan="3">{{ match['match_title'] }} </th>
+                    <th >{{ match['match_time'] }} </th>
+                  </tr>
+
+                  <tr class="bg-success text-white">
+                    <th>{{ match['home_team'] }}</th>
+                    <td><b>{{ match['home_team_odds_prev'] }} </b></td>
+                    <td><button class="mbtn" id="{{ match['match_id'] }}" onclick="checkbtn(this)">{{ match['home_team_odds'] }} <sub>ATP</sub></button><input type="hidden" id="{{ match['match_id'] }}v" value="{{ match['home_team_odds'] }}"><input type="hidden" id="{{ match['match_id'] }}tm" value="{{ match['home_team'] }}">
+                    <input type="hidden" id="{{ match['match_id'] }}mid" value="{{ match['match_id'] }}"><input type="hidden" id="{{ match['match_id'] }}st" value="0">
+                     {% if users %}
+                        {% for user in users %}
+                            {% if user.matchid == match['match_id'] and user.betwith == 0 and user.blcheck == 1 and user.team == match['home_team'] %}
+                                <button class="mbtn" id="{{ user.matchid }}{{ user.id  }}" onclick="checkbtn(this)">{{ user.odds }} <sub>{{ user.stake }}</sub></button><input type="hidden" id="{{ user.matchid }}{{ user.id  }}v" value="{{ user.odds }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}tm" value="{{ user.team }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}mid" value="{{ user.matchid }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}st" value="{{ user.stake }}">  
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </td>
+                    <td><button class="mbtn1" id="{{ match['match_id'] }}l" onclick="checkbtn2(this)">{{ match['home_team_odds'] }} <sub>ATP</sub></button><input type="hidden" id="{{ match['match_id'] }}lv" value="{{ match['home_team_odds'] }}"><input type="hidden" id="{{ match['match_id'] }}ltm" value="{{ match['home_team'] }}">
+                    <input type="hidden" id="{{ match['match_id'] }}lmid" value="{{ match['match_id'] }}"><input type="hidden" id="{{ match['match_id'] }}lst" value="0">
+                     {% if users %}
+                        {% for user in users %}
+                            {% if user.matchid == match['match_id'] and user.betwith == 0 and user.blcheck == 0 and user.team == match['home_team'] %}
+                                <button class="mbtn1" id="{{ user.matchid }}{{ user.id  }}" onclick="checkbtn2(this)">{{ user.odds }} <sub>{{ user.stake }}</sub></button><input type="hidden" id="{{ user.matchid }}{{ user.id  }}v" value="{{ user.odds }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}tm" value="{{ user.team }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}mid" value="{{ user.matchid }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}st" value="{{ user.stake }}">  
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </td>
+                  </tr>
+
+
+                <tr class="bg-warning text-white">
+                    <th>{{ match['draw_team'] }}</th>
+                    <td><b>{{ match['draw_team_odds_prev'] }} </b></td>
+                    <td><button class="mbtn" id="{{ match['match_id'] }}d" onclick="checkbtn(this)">{{ match['draw_team_odds'] }} <sub>ATP</sub></button><input type="hidden" id="{{ match['match_id'] }}dv" value="{{ match['draw_team_odds'] }}"><input type="hidden" id="{{ match['match_id'] }}dtm" value="{{ match['draw_team'] }}: {{ match['match_id'][:8] }}">
+                    <input type="hidden" id="{{ match['match_id'] }}dmid" value="{{ match['match_id'] }}"><input type="hidden" id="{{ match['match_id'] }}dst" value="0">
+                     {% if users %}
+                        {% for user in users %}
+                            {% if user.matchid == match['match_id'] and user.betwith == 0 and user.blcheck == 1 and user.team == match['draw_team'] %}
+                                <button class="mbtn" id="{{ user.matchid }}{{ user.id  }}" onclick="checkbtn(this)">{{ user.odds }} <sub>{{ user.stake }}</sub></button><input type="hidden" id="{{ user.matchid }}{{ user.id  }}v" value="{{ user.odds }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}tm" value="{{ user.team }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}mid" value="{{ user.matchid }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}st" value="{{ user.stake }}">  
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </td>
+                    <td><button class="mbtn1" id="{{ match['match_id'] }}d1" onclick="checkbtn2(this)">{{ match['draw_team_odds'] }} <sub>ATP</sub></button><input type="hidden" id="{{ match['match_id'] }}d1v" value="{{ match['draw_team_odds'] }}"><input type="hidden" id="{{ match['match_id'] }}d1tm" value="{{ match['draw_team'] }}: {{ match['match_id'][:8] }}">
+                    <input type="hidden" id="{{ match['match_id'] }}d1mid" value="{{ match['match_id'] }}"><input type="hidden" id="{{ match['match_id'] }}d1st" value="0">
+                     {% if users %}
+                        {% for user in users %}
+                            {% if user.matchid == match['match_id'] and user.betwith == 0 and user.blcheck == 0 and user.team == match['draw_team'] %}
+                                <button class="mbtn1" id="{{ user.matchid }}{{ user.id  }}" onclick="checkbtn2(this)">{{ user.odds }} <sub>{{ user.stake }}</sub></button><input type="hidden" id="{{ user.matchid }}{{ user.id  }}v" value="{{ user.odds }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}tm" value="{{ user.team }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}mid" value="{{ user.matchid }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}st" value="{{ user.stake }}">  
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </td>
+                  </tr>
+
+                <tr class="bg-success text-white">
+                    <th>{{ match['away_team'] }}</th>
+                    <td><b>{{ match['away_team_odds_prev'] }} </b></td>
+                    <td><button class="mbtn" id="{{ match['match_id'] }}a" onclick="checkbtn(this)">{{ match['away_team_odds'] }} <sub>ATP</sub></button><input type="hidden" id="{{ match['match_id'] }}av" value="{{ match['away_team_odds'] }}"><input type="hidden" id="{{ match['match_id'] }}atm" value="{{ match['away_team'] }}">
+                    <input type="hidden" id="{{ match['match_id'] }}amid" value="{{ match['match_id'] }}"><input type="hidden" id="{{ match['match_id'] }}ast" value="0">
+                     {% if users %}
+                        {% for user in users %}
+                            {% if user.matchid == match['match_id'] and user.betwith == 0 and user.blcheck == 1 and user.team == match['away_team'] %}
+                                <button class="mbtn" id="{{ user.matchid }}{{ user.id  }}" onclick="checkbtn(this)">{{ user.odds }} <sub>{{ user.stake }}</sub></button><input type="hidden" id="{{ user.matchid }}{{ user.id  }}v" value="{{ user.odds }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}tm" value="{{ user.team }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}mid" value="{{ user.matchid }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}st" value="{{ user.stake }}">  
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </td>
+                    <td><button class="mbtn1" id="{{ match['match_id'] }}al" onclick="checkbtn2(this)">{{ match['away_team_odds'] }} <sub>ATP</sub></button><input type="hidden" id="{{ match['match_id'] }}alv" value="{{ match['away_team_odds'] }}"><input type="hidden" id="{{ match['match_id'] }}altm" value="{{ match['away_team'] }}">
+                    <input type="hidden" id="{{ match['match_id'] }}almid" value="{{ match['match_id'] }}"><input type="hidden" id="{{ match['match_id'] }}alst" value="0">
+                     {% if users %}
+                        {% for user in users %}
+                            {% if user.matchid == match['match_id'] and user.betwith == 0 and user.blcheck == 0 and user.team == match['away_team'] %}
+                                <button class="mbtn1" id="{{ user.matchid }}{{ user.id  }}" onclick="checkbtn2(this)">{{ user.odds }} <sub>{{ user.stake }}</sub></button><input type="hidden" id="{{ user.matchid }}{{ user.id  }}v" value="{{ user.odds }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}tm" value="{{ user.team }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}mid" value="{{ user.matchid }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}st" value="{{ user.stake }}">  
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </td>
+                  </tr>
+
+                {% endfor %}
+            {% endif %}
+
+             {% if coppaitalia %}
+            <tr>
+                 <th colspan="4" class="text-center"> </th>
+            </tr>
+                <tr class="bg-info text-white">
+                    <th colspan="4" class="text-center">Coppa Italia</th>
+                  </tr>
+                {% for match in coppaitalia %}
+                  <tr class=" text-white">
+                    <th colspan="3">{{ match['match_title'] }} </th>
+                    <th >{{ match['match_time'] }} </th>
+                  </tr>
+
+                  <tr class="bg-success text-white">
+                    <th>{{ match['home_team'] }}</th>
+                    <td><b>{{ match['home_team_odds_prev'] }} </b></td>
+                    <td><button class="mbtn" id="{{ match['match_id'] }}" onclick="checkbtn(this)">{{ match['home_team_odds'] }} <sub>ATP</sub></button><input type="hidden" id="{{ match['match_id'] }}v" value="{{ match['home_team_odds'] }}"><input type="hidden" id="{{ match['match_id'] }}tm" value="{{ match['home_team'] }}">
+                    <input type="hidden" id="{{ match['match_id'] }}mid" value="{{ match['match_id'] }}"><input type="hidden" id="{{ match['match_id'] }}st" value="0">
+                     {% if users %}
+                        {% for user in users %}
+                            {% if user.matchid == match['match_id'] and user.betwith == 0 and user.blcheck == 1 and user.team == match['home_team'] %}
+                                <button class="mbtn" id="{{ user.matchid }}{{ user.id  }}" onclick="checkbtn(this)">{{ user.odds }} <sub>{{ user.stake }}</sub></button><input type="hidden" id="{{ user.matchid }}{{ user.id  }}v" value="{{ user.odds }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}tm" value="{{ user.team }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}mid" value="{{ user.matchid }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}st" value="{{ user.stake }}">  
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </td>
+                    <td><button class="mbtn1" id="{{ match['match_id'] }}l" onclick="checkbtn2(this)">{{ match['home_team_odds'] }} <sub>ATP</sub></button><input type="hidden" id="{{ match['match_id'] }}lv" value="{{ match['home_team_odds'] }}"><input type="hidden" id="{{ match['match_id'] }}ltm" value="{{ match['home_team'] }}">
+                    <input type="hidden" id="{{ match['match_id'] }}lmid" value="{{ match['match_id'] }}"><input type="hidden" id="{{ match['match_id'] }}lst" value="0">
+                     {% if users %}
+                        {% for user in users %}
+                            {% if user.matchid == match['match_id'] and user.betwith == 0 and user.blcheck == 0 and user.team == match['home_team'] %}
+                                <button class="mbtn1" id="{{ user.matchid }}{{ user.id  }}" onclick="checkbtn2(this)">{{ user.odds }} <sub>{{ user.stake }}</sub></button><input type="hidden" id="{{ user.matchid }}{{ user.id  }}v" value="{{ user.odds }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}tm" value="{{ user.team }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}mid" value="{{ user.matchid }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}st" value="{{ user.stake }}">  
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </td>
+                  </tr>
+
+
+                <tr class="bg-warning text-white">
+                    <th>{{ match['draw_team'] }}</th>
+                    <td><b>{{ match['draw_team_odds_prev'] }} </b></td>
+                    <td><button class="mbtn" id="{{ match['match_id'] }}d" onclick="checkbtn(this)">{{ match['draw_team_odds'] }} <sub>ATP</sub></button><input type="hidden" id="{{ match['match_id'] }}dv" value="{{ match['draw_team_odds'] }}"><input type="hidden" id="{{ match['match_id'] }}dtm" value="{{ match['draw_team'] }}: {{ match['match_id'][:8] }}">
+                    <input type="hidden" id="{{ match['match_id'] }}dmid" value="{{ match['match_id'] }}"><input type="hidden" id="{{ match['match_id'] }}dst" value="0">
+                     {% if users %}
+                        {% for user in users %}
+                            {% if user.matchid == match['match_id'] and user.betwith == 0 and user.blcheck == 1 and user.team == match['draw_team'] %}
+                                <button class="mbtn" id="{{ user.matchid }}{{ user.id  }}" onclick="checkbtn(this)">{{ user.odds }} <sub>{{ user.stake }}</sub></button><input type="hidden" id="{{ user.matchid }}{{ user.id  }}v" value="{{ user.odds }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}tm" value="{{ user.team }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}mid" value="{{ user.matchid }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}st" value="{{ user.stake }}">  
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </td>
+                    <td><button class="mbtn1" id="{{ match['match_id'] }}d1" onclick="checkbtn2(this)">{{ match['draw_team_odds'] }} <sub>ATP</sub></button><input type="hidden" id="{{ match['match_id'] }}d1v" value="{{ match['draw_team_odds'] }}"><input type="hidden" id="{{ match['match_id'] }}d1tm" value="{{ match['draw_team'] }}: {{ match['match_id'][:8] }}">
+                    <input type="hidden" id="{{ match['match_id'] }}d1mid" value="{{ match['match_id'] }}"><input type="hidden" id="{{ match['match_id'] }}d1st" value="0">
+                     {% if users %}
+                        {% for user in users %}
+                            {% if user.matchid == match['match_id'] and user.betwith == 0 and user.blcheck == 0 and user.team == match['draw_team'] %}
+                                <button class="mbtn1" id="{{ user.matchid }}{{ user.id  }}" onclick="checkbtn2(this)">{{ user.odds }} <sub>{{ user.stake }}</sub></button><input type="hidden" id="{{ user.matchid }}{{ user.id  }}v" value="{{ user.odds }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}tm" value="{{ user.team }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}mid" value="{{ user.matchid }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}st" value="{{ user.stake }}">  
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </td>
+                  </tr>
+
+                <tr class="bg-success text-white">
+                    <th>{{ match['away_team'] }}</th>
+                    <td><b>{{ match['away_team_odds_prev'] }} </b></td>
+                    <td><button class="mbtn" id="{{ match['match_id'] }}a" onclick="checkbtn(this)">{{ match['away_team_odds'] }} <sub>ATP</sub></button><input type="hidden" id="{{ match['match_id'] }}av" value="{{ match['away_team_odds'] }}"><input type="hidden" id="{{ match['match_id'] }}atm" value="{{ match['away_team'] }}">
+                    <input type="hidden" id="{{ match['match_id'] }}amid" value="{{ match['match_id'] }}"><input type="hidden" id="{{ match['match_id'] }}ast" value="0">
+                     {% if users %}
+                        {% for user in users %}
+                            {% if user.matchid == match['match_id'] and user.betwith == 0 and user.blcheck == 1 and user.team == match['away_team'] %}
+                                <button class="mbtn" id="{{ user.matchid }}{{ user.id  }}" onclick="checkbtn(this)">{{ user.odds }} <sub>{{ user.stake }}</sub></button><input type="hidden" id="{{ user.matchid }}{{ user.id  }}v" value="{{ user.odds }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}tm" value="{{ user.team }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}mid" value="{{ user.matchid }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}st" value="{{ user.stake }}">  
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </td>
+                    <td><button class="mbtn1" id="{{ match['match_id'] }}al" onclick="checkbtn2(this)">{{ match['away_team_odds'] }} <sub>ATP</sub></button><input type="hidden" id="{{ match['match_id'] }}alv" value="{{ match['away_team_odds'] }}"><input type="hidden" id="{{ match['match_id'] }}altm" value="{{ match['away_team'] }}">
+                    <input type="hidden" id="{{ match['match_id'] }}almid" value="{{ match['match_id'] }}"><input type="hidden" id="{{ match['match_id'] }}alst" value="0">
+                     {% if users %}
+                        {% for user in users %}
+                            {% if user.matchid == match['match_id'] and user.betwith == 0 and user.blcheck == 0 and user.team == match['away_team'] %}
+                                <button class="mbtn1" id="{{ user.matchid }}{{ user.id  }}" onclick="checkbtn2(this)">{{ user.odds }} <sub>{{ user.stake }}</sub></button><input type="hidden" id="{{ user.matchid }}{{ user.id  }}v" value="{{ user.odds }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}tm" value="{{ user.team }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}mid" value="{{ user.matchid }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}st" value="{{ user.stake }}">  
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </td>
+                  </tr>
+
+                {% endfor %}
+            {% endif %}
+
+
+             {% if icfgame %}
+            <tr>
+                 <th colspan="4" class="text-center"> </th>
+            </tr>
+                <tr class="bg-info text-white">
+                    <th colspan="4" class="text-center">Internationals / Club Friendly Games</th>
+                  </tr>
+                {% for match in icfgame %}
+                  <tr class=" text-white">
+                    <th colspan="3">{{ match['match_title'] }} </th>
+                    <th >{{ match['match_time'] }} </th>
+                  </tr>
+
+                  <tr class="bg-success text-white">
+                    <th>{{ match['home_team'] }}</th>
+                    <td><b>{{ match['home_team_odds_prev'] }} </b></td>
+                    <td><button class="mbtn" id="{{ match['match_id'] }}" onclick="checkbtn(this)">{{ match['home_team_odds'] }} <sub>ATP</sub></button><input type="hidden" id="{{ match['match_id'] }}v" value="{{ match['home_team_odds'] }}"><input type="hidden" id="{{ match['match_id'] }}tm" value="{{ match['home_team'] }}">
+                    <input type="hidden" id="{{ match['match_id'] }}mid" value="{{ match['match_id'] }}"><input type="hidden" id="{{ match['match_id'] }}st" value="0">
+                     {% if users %}
+                        {% for user in users %}
+                            {% if user.matchid == match['match_id'] and user.betwith == 0 and user.blcheck == 1 and user.team == match['home_team'] %}
+                                <button class="mbtn" id="{{ user.matchid }}{{ user.id  }}" onclick="checkbtn(this)">{{ user.odds }} <sub>{{ user.stake }}</sub></button><input type="hidden" id="{{ user.matchid }}{{ user.id  }}v" value="{{ user.odds }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}tm" value="{{ user.team }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}mid" value="{{ user.matchid }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}st" value="{{ user.stake }}">  
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </td>
+                    <td><button class="mbtn1" id="{{ match['match_id'] }}l" onclick="checkbtn2(this)">{{ match['home_team_odds'] }} <sub>ATP</sub></button><input type="hidden" id="{{ match['match_id'] }}lv" value="{{ match['home_team_odds'] }}"><input type="hidden" id="{{ match['match_id'] }}ltm" value="{{ match['home_team'] }}">
+                    <input type="hidden" id="{{ match['match_id'] }}lmid" value="{{ match['match_id'] }}"><input type="hidden" id="{{ match['match_id'] }}lst" value="0">
+                     {% if users %}
+                        {% for user in users %}
+                            {% if user.matchid == match['match_id'] and user.betwith == 0 and user.blcheck == 0 and user.team == match['home_team'] %}
+                                <button class="mbtn1" id="{{ user.matchid }}{{ user.id  }}" onclick="checkbtn2(this)">{{ user.odds }} <sub>{{ user.stake }}</sub></button><input type="hidden" id="{{ user.matchid }}{{ user.id  }}v" value="{{ user.odds }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}tm" value="{{ user.team }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}mid" value="{{ user.matchid }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}st" value="{{ user.stake }}">  
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </td>
+                  </tr>
+
+
+                <tr class="bg-warning text-white">
+                    <th>{{ match['draw_team'] }}</th>
+                    <td><b>{{ match['draw_team_odds_prev'] }} </b></td>
+                    <td><button class="mbtn" id="{{ match['match_id'] }}d" onclick="checkbtn(this)">{{ match['draw_team_odds'] }} <sub>ATP</sub></button><input type="hidden" id="{{ match['match_id'] }}dv" value="{{ match['draw_team_odds'] }}"><input type="hidden" id="{{ match['match_id'] }}dtm" value="{{ match['draw_team'] }}: {{ match['match_id'][:8] }}">
+                    <input type="hidden" id="{{ match['match_id'] }}dmid" value="{{ match['match_id'] }}"><input type="hidden" id="{{ match['match_id'] }}dst" value="0">
+                     {% if users %}
+                        {% for user in users %}
+                            {% if user.matchid == match['match_id'] and user.betwith == 0 and user.blcheck == 1 and user.team == match['draw_team'] %}
+                                <button class="mbtn" id="{{ user.matchid }}{{ user.id  }}" onclick="checkbtn(this)">{{ user.odds }} <sub>{{ user.stake }}</sub></button><input type="hidden" id="{{ user.matchid }}{{ user.id  }}v" value="{{ user.odds }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}tm" value="{{ user.team }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}mid" value="{{ user.matchid }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}st" value="{{ user.stake }}">  
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </td>
+                    <td><button class="mbtn1" id="{{ match['match_id'] }}d1" onclick="checkbtn2(this)">{{ match['draw_team_odds'] }} <sub>ATP</sub></button><input type="hidden" id="{{ match['match_id'] }}d1v" value="{{ match['draw_team_odds'] }}"><input type="hidden" id="{{ match['match_id'] }}d1tm" value="{{ match['draw_team'] }}: {{ match['match_id'][:8] }}">
+                    <input type="hidden" id="{{ match['match_id'] }}d1mid" value="{{ match['match_id'] }}"><input type="hidden" id="{{ match['match_id'] }}d1st" value="0">
+                     {% if users %}
+                        {% for user in users %}
+                            {% if user.matchid == match['match_id'] and user.betwith == 0 and user.blcheck == 0 and user.team == match['draw_team'] %}
+                                <button class="mbtn1" id="{{ user.matchid }}{{ user.id  }}" onclick="checkbtn2(this)">{{ user.odds }} <sub>{{ user.stake }}</sub></button><input type="hidden" id="{{ user.matchid }}{{ user.id  }}v" value="{{ user.odds }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}tm" value="{{ user.team }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}mid" value="{{ user.matchid }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}st" value="{{ user.stake }}">  
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </td>
+                  </tr>
+
+                <tr class="bg-success text-white">
+                    <th>{{ match['away_team'] }}</th>
+                    <td><b>{{ match['away_team_odds_prev'] }} </b></td>
+                    <td><button class="mbtn" id="{{ match['match_id'] }}a" onclick="checkbtn(this)">{{ match['away_team_odds'] }} <sub>ATP</sub></button><input type="hidden" id="{{ match['match_id'] }}av" value="{{ match['away_team_odds'] }}"><input type="hidden" id="{{ match['match_id'] }}atm" value="{{ match['away_team'] }}">
+                    <input type="hidden" id="{{ match['match_id'] }}amid" value="{{ match['match_id'] }}"><input type="hidden" id="{{ match['match_id'] }}ast" value="0">
+                     {% if users %}
+                        {% for user in users %}
+                            {% if user.matchid == match['match_id'] and user.betwith == 0 and user.blcheck == 1 and user.team == match['away_team'] %}
+                                <button class="mbtn" id="{{ user.matchid }}{{ user.id  }}" onclick="checkbtn(this)">{{ user.odds }} <sub>{{ user.stake }}</sub></button><input type="hidden" id="{{ user.matchid }}{{ user.id  }}v" value="{{ user.odds }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}tm" value="{{ user.team }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}mid" value="{{ user.matchid }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}st" value="{{ user.stake }}">  
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </td>
+                    <td><button class="mbtn1" id="{{ match['match_id'] }}al" onclick="checkbtn2(this)">{{ match['away_team_odds'] }} <sub>ATP</sub></button><input type="hidden" id="{{ match['match_id'] }}alv" value="{{ match['away_team_odds'] }}"><input type="hidden" id="{{ match['match_id'] }}altm" value="{{ match['away_team'] }}">
+                    <input type="hidden" id="{{ match['match_id'] }}almid" value="{{ match['match_id'] }}"><input type="hidden" id="{{ match['match_id'] }}alst" value="0">
+                     {% if users %}
+                        {% for user in users %}
+                            {% if user.matchid == match['match_id'] and user.betwith == 0 and user.blcheck == 0 and user.team == match['away_team'] %}
+                                <button class="mbtn1" id="{{ user.matchid }}{{ user.id  }}" onclick="checkbtn2(this)">{{ user.odds }} <sub>{{ user.stake }}</sub></button><input type="hidden" id="{{ user.matchid }}{{ user.id  }}v" value="{{ user.odds }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}tm" value="{{ user.team }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}mid" value="{{ user.matchid }}"><input type="hidden" id="{{ user.matchid }}{{ user.id  }}st" value="{{ user.stake }}">  
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </td>
+                  </tr>
+
+                {% endfor %}
+            {% endif %}
+                </tbody>
+              </table>
+              <div class="gap-0"></div>
+            </div>
+            <!--end code-->
+
+        </div>
+    </div>
+
+    <div class="form-body form-content col-lg-4 ">
+        <div class="sticky-top">
+        <div class="form-items mycard1 ">
+                <div class="mb-3 text-center">
+                <h4>
+                  <span>Back Bet</span>
+                </h4>
+              </div>
+              <form action="/bet" method="post">
+              <table id="backbet" class="grid table table-bordered table-sortable">
+            <thead  class="thead-light">
+                <tr><th>Bet for</th><th>Odds</th><th>Stake</th><th>Profit</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td id="backtm">-</td>
+                    <td><input  type="number" id="backinput1" placeholder="0.00" required name="odds" min="1" value="1.00" step="0.01" title="Currency" pattern="^\d+(?:\.\d{1,2})?$" onblur="this.parentNode.parentNode.style.backgroundColor=/^\d+(?:\.\d{1,2})?$/.test(this.value)?'inherit':'red' " class="form-control"></td>
+                    <td><input type="number" id="backinput2" placeholder="00" required name="stake" min="0" value="0" title="Currency" class="form-control"></td>
+                    <td> <h4 id="backprofit">0</h4></td>
+                </tr>
+ 
+                <tr class="lfoot">
+                    <td class="text-left" colspan="2" id="backcom">Commission(2%): 0</td>
+                    <td colspan="3" id="backlbty">Liability: 0</td>
+                </tr>
+             </tbody>
+        </table>
+            <input type = "hidden" name = "matchid" id="matchidd" value=""/>
+            <input type = "hidden" name = "team" id="fbacktm" value="" />
+            <input type = "hidden" name = "blcheck" value="0" />
+             <input type = "submit" class="btn btn-primary" value = "Place Bets" data-inline="true" class="btn btn-primary" data-theme="b" style="float: right;" />
+            </form>
+        </div>
+        <br>
+        <div class="form-items mycard1 ">
+                <div class="mb-3 text-center">
+                <h4>
+                  <span>Lay Bet</span>
+                </h4>
+              </div>
+            <form action="/bet" method="post">
+            <table id="laybet" class="grid table table-bordered table-sortable">
+            <thead  class="thead-light">
+                <tr><th>Bet for</th><th>Odds</th><th>Stake</th><th>Profit</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td id="laytm">-</td>
+                    <td><input  type="number" id="layinput1" placeholder="0.00" required name="odds" min="1.01" value="1.01" step="0.01" title="Currency" pattern="^\d+(?:\.\d{1,2})?$" onblur="this.parentNode.parentNode.style.backgroundColor=/^\d+(?:\.\d{1,2})?$/.test(this.value)?'inherit':'red' " class="form-control"></td>
+                    <td><input type="number" id="layinput2" placeholder="00" required name="stake" min="0" value="0" title="Currency" class="form-control"></td>
+                    <td><h4 id="layprofit">0</h4></td>
+                </tr>
+                 <tr class="lfoot">
+                    <td class="text-left" colspan="2" id="laycom">Commission(2%): 0</td>
+                    <td colspan="3" id="laylbty">Liability: 0</td>
+                </tr>
+             </tbody>
+        </table>
+            <input type = "hidden" name = "matchid" id="matchiddd" value=""/>
+            <input type = "hidden" name = "team" id="flaytm" value="" />
+            <input type = "hidden" name = "blcheck" value="1" />
+             <input type = "submit" class="btn btn-primary" value = "Place Bets" data-inline="true" class="btn btn-primary" data-theme="b" style="float: right;" />
+         </form>
+        </div>
+    </div>
+    </div>
+</div>
+    </section>
+
+</body>
+<script type="text/javascript">
+
+var backinput1 = document.getElementById('backinput1');
+var backinput2 = document.getElementById('backinput2');
+var backprofit = document.getElementById('backprofit');
+var backlbty = document.getElementById('backlbty');
+var backcom = document.getElementById('backcom');
+
+backinput1.addEventListener("input", backfun);
+backinput2.addEventListener("input", backfun);
+
+function backfun() {
+  
+var backodd = Math.abs(parseFloat(backinput1.value).toFixed(2));
+var backstake = Math.abs(parseFloat(backinput2.value).toFixed(2)); 
+var backpfinal = backstake * (backodd - 1);
+var bcomsn = parseFloat((backpfinal * 0.02)).toFixed(2);
+
+backprofit.innerHTML =  parseFloat((backpfinal - bcomsn)).toFixed(2);
+backlbty.innerHTML = "Liability: " +backstake ;
+backcom.innerHTML = "Commission(2%): " + bcomsn;
+}
+
+
+var layinput1 = document.getElementById('layinput1');
+var layinput2 = document.getElementById('layinput2');
+var layprofit = document.getElementById('layprofit');
+var laylbty = document.getElementById('laylbty');
+var laycom = document.getElementById('laycom');
+
+layinput1.addEventListener("input", layfun);
+layinput2.addEventListener("input", layfun);
+
+function layfun() {
+  
+var layodd = Math.abs(parseFloat(layinput1.value).toFixed(2));
+var laystake = Math.abs(parseFloat(layinput2.value).toFixed(2)); 
+var lailbty = parseFloat((laystake * (layodd - 1))).toFixed(2);
+var comsn = parseFloat((laystake * 0.02)).toFixed(2);
+
+layprofit.innerHTML =  parseFloat((laystake - comsn)).toFixed(2);
+laycom.innerHTML = "Commission(2%): " + comsn;
+laylbty.innerHTML = "Liability: " +lailbty
+}
+
+ function checkbtn(that){
+    var tmpbtn= document.getElementById((that.id+'v'));
+    var tmpbtntm= document.getElementById((that.id+'tm'));
+    var tmpbtnmid= document.getElementById((that.id+'mid'));
+    var tmpbtnst= document.getElementById((that.id+'st'));
+    var tmpbtnv = Math.abs(parseFloat(tmpbtn.value).toFixed(2));
+    document.getElementById('backinput1').value = tmpbtnv ;
+    document.getElementById('backinput2').value = tmpbtnst.value ;
+    backtm.innerHTML = tmpbtntm.value ;
+    document.getElementById('fbacktm').value = tmpbtntm.value ;
+    document.getElementById('matchidd').value = tmpbtnmid.value ;
+    backfun()
+}
+ function checkbtn2(that){
+    var tmpbtn= document.getElementById((that.id+'v'));
+    var tmpbtntm= document.getElementById((that.id+'tm'));
+    var tmpbtnmid= document.getElementById((that.id+'mid'));
+    var tmpbtnst= document.getElementById((that.id+'st'));
+    var tmpbtnv = Math.abs(parseFloat(tmpbtn.value).toFixed(2));
+    document.getElementById('layinput1').value = tmpbtnv ;
+    document.getElementById('layinput2').value = tmpbtnst.value ;
+    laytm.innerHTML = tmpbtntm.value ;
+    document.getElementById('flaytm').value = tmpbtntm.value ;
+    document.getElementById('matchiddd').value = tmpbtnmid.value ;
+    layfun()
+}
+</script>
+</html>
