@@ -50,37 +50,43 @@ def checkingbets():
         else:
             return 0
 # Fetching from APIs
-def fetchapi(cid,src):
+def fetchapi():
     url = 'https://apis.odibets.com/v4/matches'
-    cmptid = cid
+    cmptid = ''
     tab =''
-    src = src
+    src = 2
     response = requests.get(url, headers = {'Content-Type': 'application/json'}, params ={'src' : src, 'sport_id' : 'soccer', 'tab' : tab, 'country_id' : '', 'day' : '', 'sort_by' : '', 'competition_id' : cmptid, 'trials' : 0}, timeout=10)
     json_data = json.loads(response.text)
-    allmatches = json_data['data']['competitions'][0]
-    finalmatch=[]
-    for match1 in allmatches['matches']:
-        match1_time = dt.strptime(match1['start_time'], '%Y-%m-%d %H:%M:%S')
-        match_time_Indian = match1_time + timedelta(hours=2, minutes=30)
-        match1_teamH = match1['home_team']
-        match1_teamA = match1['away_team']
-        match1_draw = 'Draw'
-        match1_id = match1_teamH.replace(" ", "")[:3].lower()+ 'vs' +match1_teamA.replace(" ", "")[:3].lower() +str(match1_time.day)+str(match1_time.month)+str(match1_time.year)
-        match1_title = match1_teamH + ' Vs ' + match1_teamA
-        match1_oddsH = match1['markets'][0]['outcomes'][0]['odd_value']
-        match1_oddsH_prev = match1['markets'][0]['outcomes'][0]['prev_odd_value']
-        match1_oddsD = match1['markets'][0]['outcomes'][1]['odd_value']
-        match1_oddsD_prev = match1['markets'][0]['outcomes'][1]['prev_odd_value']
-        match1_oddsA = match1['markets'][0]['outcomes'][2]['odd_value']
-        match1_oddsA_prev = match1['markets'][0]['outcomes'][2]['prev_odd_value']
+    allmatches = []
+    for comp1 in json_data['data']['competitions']:
+        finalmatch=[]
+        try:
+            for match1 in comp1['matches']:
+                match1_time = dt.strptime(match1['start_time'], '%Y-%m-%d %H:%M:%S')
+                match_time_Indian = match1_time + timedelta(hours=2, minutes=30)
+                match1_teamH = match1['home_team']
+                match1_teamA = match1['away_team']
+                match1_draw = 'Draw'
+                match1_id = match1_teamH.replace(" ", "")[:3].lower()+ 'vs' +match1_teamA.replace(" ", "")[:3].lower() +str(match1_time.day)+str(match1_time.month)+str(match1_time.year)
+                match1_title = match1_teamH + ' Vs ' + match1_teamA
+                match1_oddsH = match1['markets'][0]['outcomes'][0]['odd_value']
+                match1_oddsH_prev = match1['markets'][0]['outcomes'][0]['prev_odd_value']
+                match1_oddsD = match1['markets'][0]['outcomes'][1]['odd_value']
+                match1_oddsD_prev = match1['markets'][0]['outcomes'][1]['prev_odd_value']
+                match1_oddsA = match1['markets'][0]['outcomes'][2]['odd_value']
+                match1_oddsA_prev = match1['markets'][0]['outcomes'][2]['prev_odd_value']
 
-        case = {'match_id': match1_id, 'match_title': match1_title, 'match_time':match_time_Indian, 'draw_team': match1_draw, 'home_team': match1_teamH, 'away_team': match1_teamA, 'home_team_odds':match1_oddsH , 'home_team_odds_prev': match1_oddsH_prev, 'away_team_odds': match1_oddsA, 'away_team_odds_prev': match1_oddsA_prev, 'draw_team_odds': match1_oddsD,'draw_team_odds_prev':match1_oddsD_prev}
-        finalmatch.append(case)
-    return finalmatch
+                case = {'match_id': match1_id, 'match_title': match1_title, 'match_time':match_time_Indian, 'draw_team': match1_draw, 'home_team': match1_teamH, 'away_team': match1_teamA, 'home_team_odds':match1_oddsH , 'home_team_odds_prev': match1_oddsH_prev, 'away_team_odds': match1_oddsA, 'away_team_odds_prev': match1_oddsA_prev, 'draw_team_odds': match1_oddsD,'draw_team_odds_prev':match1_oddsD_prev}
+                finalmatch.append(case)
+        except KeyError:
+            continue
+        competition = {'competition_name': comp1['competition_name'], 'country_name':comp1['country_name'], 'matches': finalmatch}
+        allmatches.append(competition)
+    return allmatches
 
 @app.route('/')
 def home():
-    return render_template('index.html' , users = CustomerBet.query.all(), pleague = fetchapi(17,2), eflcup=fetchapi(21,2), icfgame=fetchapi(853,2), coppaitalia=fetchapi(328,2), supercupspain=fetchapi(213,2), today=dt.today().strftime("%B %d, %Y"))
+    return render_template('index.html' , users = CustomerBet.query.all(), allleague =fetchapi(), today=dt.today().strftime("%B %d, %Y"))
 
 @app.route('/bet', methods = ['GET', 'POST'])
 def bet():
@@ -104,7 +110,9 @@ def bet():
                 flash('Bet successfully placed')
     return render_template('bet.html', users = CustomerBet.query.all())
 
-
+@app.route('/match')
+def fetching():
+    return fetchapi()
 
 if __name__ == "__main__":
     app.debug = True
