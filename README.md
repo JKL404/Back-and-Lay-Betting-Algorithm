@@ -10,7 +10,7 @@ A betting exchange is a marketplace where the customers bet against each other, 
 
 ## Features
 
-- Fetching Realtime Game Odds using api (only Football)
+- Fetching real-time odds for Cricket, Football, Basketball, Tennis and Ice Hockey using api
 - Betting with one user to another
 - Bet's Liability and Profit Calculator
 
