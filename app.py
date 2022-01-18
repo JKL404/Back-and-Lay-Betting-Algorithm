@@ -8,6 +8,7 @@ app = Flask(__name__)
 app.config['SESSION_TYPE'] = 'memcached'
 app.config['SECRET_KEY'] = 'super secret key'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database/database.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
 
 class CustomerBet(db.Model):
