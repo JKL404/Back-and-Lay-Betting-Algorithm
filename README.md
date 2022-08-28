@@ -36,7 +36,7 @@ your preferred browser.
 ```
 
 ## DEMO
-Link: https://jkl-streaming.herokuapp.com/
+Link: https://back-and-lay-betting.herokuapp.com/
 
   ![Image 1](https://raw.githubusercontent.com/JKL404/Back-and-Lay-Betting-Algorithm/main/demo/1.png)
   
